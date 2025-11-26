@@ -56,8 +56,7 @@ def add_customer():
         except Exception as e:
             return f"Error adding customer: {e}"
 
-    return render_template('add_customer.html')
-
+    return render_template('customer_form.html', customer=None)
 
 @app.route('/update/<int:id>',methods=['GET','POST'])
 def update_customer(id):
@@ -73,7 +72,7 @@ def update_customer(id):
             db.session.commit()
             return redirect(url_for('index'))
         except:
-            return "خطا در بروز رسانی مشتری"
+            return "Failed to update customer."
         
     return render_template ('customer_form.html',customer=customer_to_update)
 
@@ -86,7 +85,7 @@ def delete_customer(id):
         db.session.commit()
         return redirect(url_for("index"))
     except:
-        return "خطا در حذف مشتری "
+        return "Failed to delete customer."
     
 
 if __name__ == '__main__':
